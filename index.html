@@ -861,7 +861,7 @@ h3.number, h4.title {
         var grid3 = document.createElement('div');
         grid3.className = 'cv-replacement-grid';
         grid3.style.cssText = 'display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(10px,1.5vw,14px);padding:20px 0;';
-        var tools = ['Notion', 'Jira / Trello', 'Salesforce', 'Figma', 'Canva / Adobe', 'ChatGPT / Claude', 'Excel / Google Sheets', 'Google Workspace', 'Slack / Teams', 'PowerPoint / Keynote'];
+        var tools = ['Notion', 'Jira', 'CRM', 'Figma', 'Canva / Adobe', 'ChatGPT / Claude', 'Excel / Google Sheets', 'Google Workspace', 'Slack / Teams', 'PowerPoint / Keynote'];
         tools.forEach(function(t) { grid3.appendChild(createToolCard(t)); });
         var container3 = toolSection.querySelector('.bloc-teaserspeakers');
         if (container3) container3.appendChild(grid3);
