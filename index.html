@@ -1284,6 +1284,31 @@ h3.number, h4.title {
         portfolioObs.observe(portfolioContainer);
     })();
 
+    // === MAKE EMAIL & PHONE CLICKABLE ===
+    (function() {
+        var contact = document.getElementById('bl-b3b735c6-509f-4ef2-afa1-34f60a354d1c');
+        if (!contact) return;
+        contact.querySelectorAll('span').forEach(function(el) {
+            var text = el.textContent.trim();
+            if (text === 'samuel.sequaris@gmail.com' && el.childNodes.length === 1) {
+                var a = document.createElement('a');
+                a.href = 'mailto:samuel.sequaris@gmail.com';
+                a.textContent = text;
+                a.style.cssText = 'color:inherit;text-decoration:none;';
+                el.textContent = '';
+                el.appendChild(a);
+            }
+            if (text === '+33 7 78 10 77 24' && el.childNodes.length === 1) {
+                var a2 = document.createElement('a');
+                a2.href = 'tel:+33778107724';
+                a2.textContent = text;
+                a2.style.cssText = 'color:inherit;text-decoration:none;';
+                el.textContent = '';
+                el.appendChild(a2);
+            }
+        });
+    })();
+
 })();
 </script></body></html>
 </body></html>
