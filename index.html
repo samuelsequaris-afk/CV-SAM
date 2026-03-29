@@ -697,7 +697,7 @@ h3.number, h4.title {
             titleBlock.innerHTML = '<div style="font-size:11px;text-transform:uppercase;letter-spacing:2.5px;color:rgb(' + exp.glow + ');font-weight:600;margin-bottom:6px;">' + exp.company + '</div><div style="font-size:18px;font-weight:600;color:white;line-height:1.3;">' + exp.role + '</div>';
             var dateBlock = document.createElement('div');
             dateBlock.style.cssText = 'text-align:right;flex-shrink:0;';
-            dateBlock.innerHTML = '<div style="font-size:13px;color:rgba(255,255,255,0.5);font-weight:500;">' + exp.location + '</div><div style="font-size:13px;color:rgba(255,255,255,0.4);">' + exp.dates + '</div>';
+            dateBlock.innerHTML = '<div style="font-size:13px;color:rgba(255,255,255,0.7);font-weight:400;">' + exp.location + '</div><div style="font-size:13px;color:rgba(255,255,255,0.6);">' + exp.dates + '</div>';
             header.appendChild(titleBlock);
             header.appendChild(dateBlock);
             card.appendChild(header);
@@ -790,7 +790,7 @@ h3.number, h4.title {
             card.appendChild(iconArea);
             var content = document.createElement('div');
             content.style.cssText = 'padding:0 24px 28px;flex:1;display:flex;flex-direction:column;';
-            content.innerHTML = '<div style="font-size:13px;color:rgba(180,120,255,0.85);font-weight:500;margin-bottom:16px;">Core Competency</div><div style="height:1px;background:linear-gradient(to right,rgba(160,80,240,0.4),rgba(100,40,180,0.1),transparent);margin-bottom:16px;"></div>';
+            content.innerHTML = '<div style="height:1px;background:linear-gradient(to right,rgba(160,80,240,0.3),rgba(100,40,180,0.08),transparent);margin-bottom:16px;margin-top:4px;"></div>';
             var list = document.createElement('div');
             list.style.cssText = 'flex:1;';
             skill.items.forEach(function(item) {
@@ -805,7 +805,7 @@ h3.number, h4.title {
         });
 
         var styleTag = document.createElement('style');
-        styleTag.textContent = '@keyframes skillParticle{0%{opacity:0.15;transform:translateY(0)}100%{opacity:0.5;transform:translateY(-12px)}}';
+        styleTag.textContent = '@keyframes skillParticle{0%{opacity:0.15;transform:translateY(0)}100%{opacity:0.5;transform:translateY(-12px)}}.skill-card-animate:hover{transform:translateY(-6px) scale(1.02) !important;box-shadow:0 16px 48px rgba(0,0,0,0.6),0 0 60px rgba(140,60,200,0.25) !important;border-color:rgba(180,120,255,0.5) !important;}';
         document.head.appendChild(styleTag);
 
         skillsContainer.appendChild(grid);
