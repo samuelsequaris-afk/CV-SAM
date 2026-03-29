@@ -329,6 +329,35 @@ h3.number, h4.title {
     }
     .app-header .burger-menu {
         display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 44px !important;
+        height: 44px !important;
+        cursor: pointer !important;
+    }
+    /* Draw hamburger icon (InWink icon font doesn't load in static clone) */
+    #approot #burger-menu .inwink-menu {
+        display: block !important;
+        width: 22px !important;
+        height: 18px !important;
+        position: relative !important;
+        font-style: normal !important;
+        font-size: 0 !important;
+        line-height: 0 !important;
+        overflow: hidden !important;
+    }
+    #approot #burger-menu .inwink-menu::before {
+        content: '' !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 22px !important;
+        height: 2px !important;
+        background: white !important;
+        box-shadow: 0 8px 0 white, 0 16px 0 white !important;
+    }
+    #approot #burger-menu .inwink-menu::after {
+        content: none !important;
     }
 
     /* Hero: force visible on mobile (InWink hides has-viewport below 431px) */
@@ -343,9 +372,24 @@ h3.number, h4.title {
         padding: 20px !important;
     }
 
+    /* Hide second hero section on mobile (card + event dates duplicate) */
+    #bl-f9fcced2-8a04-4791-9951-95c7d3c0d387 {
+        display: none !important;
+    }
+
     /* Background: disable fixed attachment on mobile (broken on iOS) */
     .dynamicpage {
         background-attachment: scroll !important;
+    }
+
+    /* Experience: stack date/city below role on mobile */
+    .exp-card-animate > div[style*="justify-content"] {
+        flex-direction: column !important;
+        gap: 4px !important;
+    }
+    .exp-card-animate > div[style*="justify-content"] > div[style*="text-align"] {
+        text-align: left !important;
+        flex-shrink: 1 !important;
     }
 
     /* Stats section: reduce parent padding + grid layout + smaller numbers */
