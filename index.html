@@ -148,7 +148,7 @@ body {
 .dynamicbloc-wrapper h2.title,
 .dynamicbloc-wrapper .bloc-header h2 {
     font-family: 'Montserrat', sans-serif !important;
-    font-size: 42px !important;
+    font-size: clamp(24px, 5vw, 42px) !important;
     font-weight: 300 !important;
     letter-spacing: -0.5px !important;
     color: white !important;
@@ -157,7 +157,7 @@ body {
 #bl-a52511e8-db1e-4aab-bd0f-97a4bbe39888 .dynamicbloc-wrapper-contentcontainer {
     max-width: 1400px !important;
     margin: 0 auto !important;
-    padding: 30px 80px !important;
+    padding: clamp(16px,3vw,30px) clamp(16px,6vw,80px) !important;
 }
 #bl-a52511e8-db1e-4aab-bd0f-97a4bbe39888 .bloc-teaserspeakers {
     padding: 0 !important;
@@ -170,7 +170,7 @@ body {
 #bl-b3b735c6-509f-4ef2-afa1-34f60a354d1c .dynamicbloc-wrapper-contentcontainer {
     max-width: 1400px !important;
     margin: 0 auto !important;
-    padding: 40px 80px !important;
+    padding: clamp(20px,3vw,40px) clamp(16px,6vw,80px) !important;
 }
 .app-header {
     position: fixed !important;
@@ -254,7 +254,7 @@ iframe.info-map {
 #bl-02c156a6-e768-4e96-afe6-b441ef40d51a .fieldtext > div:first-child {
     display: flex !important;
     align-items: center !important;
-    gap: 40px !important;
+    gap: clamp(20px, 4vw, 40px) !important;
     width: 100% !important;
     max-width: 100% !important;
 }
@@ -302,8 +302,82 @@ h3.number, h4.title {
 #bl-3dff2cec-e658-4825-b819-0927da0843b1 .dynamicbloc-wrapper-contentcontainer {
     max-width: 1400px !important;
     margin: 0 auto !important;
-    padding: 40px 80px !important;
+    padding: clamp(20px,3vw,40px) clamp(16px,6vw,80px) !important;
 }
+
+/* ===== RESPONSIVE OVERRIDES ===== */
+
+@media screen and (max-width: 1024px) {
+    /* Tools: 5 -> 3 cols */
+    #bl-a52511e8-db1e-4aab-bd0f-97a4bbe39888 .cv-replacement-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .app-layout { padding-top: 56px !important; }
+
+    /* Stats section: reduce parent padding + grid layout + smaller numbers */
+    #bl-9d48fc69-1bd7-4fa6-ba60-20b6bdfb3325 .bloc-itemslist {
+        padding: 0 16px !important;
+    }
+    #bl-9d48fc69-1bd7-4fa6-ba60-20b6bdfb3325 .inwink-items {
+        width: 100% !important;
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+        justify-content: stretch !important;
+        justify-items: center !important;
+    }
+    #bl-9d48fc69-1bd7-4fa6-ba60-20b6bdfb3325 .inwink-item {
+        width: 100% !important;
+        min-width: 0 !important;
+    }
+    #bl-9d48fc69-1bd7-4fa6-ba60-20b6bdfb3325 .itemcontent {
+        width: 100% !important;
+        min-width: 0 !important;
+    }
+    #bl-9d48fc69-1bd7-4fa6-ba60-20b6bdfb3325 h3.number {
+        white-space: nowrap !important;
+    }
+    #bl-9d48fc69-1bd7-4fa6-ba60-20b6bdfb3325 h3.number {
+        font-size: clamp(28px, 6vw, 42px) !important;
+    }
+    #bl-9d48fc69-1bd7-4fa6-ba60-20b6bdfb3325 h4.title {
+        font-size: 14px !important;
+    }
+    .app-header .links-list {
+        display: flex !important; flex-wrap: wrap !important;
+        gap: 4px 8px !important; justify-content: center !important;
+    }
+    .app-header .menuitem a[role="button"] span { font-size: 11px !important; }
+
+    #skills-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 16px !important; }
+    #bl-a52511e8-db1e-4aab-bd0f-97a4bbe39888 .cv-replacement-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    #school-grid { grid-template-columns: repeat(2, 1fr) !important; }
+
+    /* Hide timeline dots & line on mobile */
+    .exp-dot-animate { display: none !important; }
+    .exp-line-animate { display: none !important; }
+    #exp-timeline { padding-left: 0 !important; }
+}
+
+@media screen and (max-width: 480px) {
+    .app-layout { padding-top: 48px !important; }
+    .app-header .menuitem a[role="button"] span { font-size: 10px !important; }
+
+    #skills-grid { grid-template-columns: 1fr !important; gap: 14px !important; }
+    #bl-a52511e8-db1e-4aab-bd0f-97a4bbe39888 .cv-replacement-grid {
+        grid-template-columns: 1fr !important;
+    }
+    #school-grid { grid-template-columns: 1fr !important; }
+    #projects-grid { grid-template-columns: 1fr !important; }
+
+    .exp-card-animate { padding: 16px !important; }
+}
+
 </style>
 </head>
                             <body>
@@ -400,18 +474,19 @@ h3.number, h4.title {
     if (anchorSection) {
         var expContainer = document.createElement('div');
         expContainer.id = 'professional-experiences';
-        expContainer.style.cssText = 'padding:30px 80px;max-width:1400px;margin:0 auto;';
+        expContainer.style.cssText = 'padding:clamp(16px,3vw,30px) clamp(16px,6vw,80px);max-width:1400px;margin:0 auto;';
 
         // Section title
         var titleEl = document.createElement('h2');
         titleEl.className = 'exp-title-animate';
-        titleEl.style.cssText = 'font-family:Montserrat,sans-serif;font-size:42px;font-weight:300;color:white;margin-top:0;margin-bottom:50px;letter-spacing:-0.5px;opacity:0;transform:translateY(30px);transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1),transform 0.8s cubic-bezier(0.16,1,0.3,1);';
+        titleEl.style.cssText = 'font-family:Montserrat,sans-serif;font-size:clamp(24px,5vw,42px);font-weight:300;color:white;margin-top:0;margin-bottom:clamp(24px,4vw,50px);letter-spacing:-0.5px;opacity:0;transform:translateY(30px);transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1),transform 0.8s cubic-bezier(0.16,1,0.3,1);';
         titleEl.textContent = 'Professional Experiences';
         expContainer.appendChild(titleEl);
 
         // Timeline container
         var timeline = document.createElement('div');
-        timeline.style.cssText = 'position:relative;padding-left:40px;';
+        timeline.id = 'exp-timeline';
+        timeline.style.cssText = 'position:relative;padding-left:clamp(20px,4vw,40px);';
 
         // Timeline line
         var tLine = document.createElement('div');
@@ -431,7 +506,7 @@ h3.number, h4.title {
         experiences.forEach(function(exp, i) {
             var card = document.createElement('div');
             card.className = 'exp-card-animate';
-            card.style.cssText = 'position:relative;margin-bottom:32px;padding:28px 32px;background:rgba(255,255,255,0.06);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.12);border-left:3px solid rgb(' + exp.glow + ');border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,0.2),inset 0 1px 0 rgba(255,255,255,0.08);transition:transform 0.6s cubic-bezier(0.16,1,0.3,1),box-shadow 0.3s,opacity 0.6s cubic-bezier(0.16,1,0.3,1);opacity:0;transform:translateY(60px) scale(0.97);transition-delay:' + (i * 0.12) + 's;';
+            card.style.cssText = 'position:relative;margin-bottom:32px;padding:clamp(16px,3vw,28px) clamp(16px,3vw,32px);background:rgba(255,255,255,0.06);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.12);border-left:3px solid rgb(' + exp.glow + ');border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,0.2),inset 0 1px 0 rgba(255,255,255,0.08);transition:transform 0.6s cubic-bezier(0.16,1,0.3,1),box-shadow 0.3s,opacity 0.6s cubic-bezier(0.16,1,0.3,1);opacity:0;transform:translateY(60px) scale(0.97);transition-delay:' + (i * 0.12) + 's;';
             var dot = document.createElement('div');
             dot.className = 'exp-dot-animate';
             dot.style.cssText = 'position:absolute;left:-47px;top:32px;width:12px;height:12px;border-radius:50%;background:rgb(' + exp.glow + ');box-shadow:0 0 12px rgba(' + exp.glow + ',0.6);transform:scale(0);transition:transform 0.5s cubic-bezier(0.34,1.56,0.64,1);transition-delay:' + (i * 0.12 + 0.2) + 's;';
@@ -461,7 +536,7 @@ h3.number, h4.title {
         expContainer.appendChild(timeline);
         anchorSection.parentElement.insertBefore(expContainer, anchorSection);
         var sepBefore = document.createElement('div');
-        sepBefore.style.cssText = 'height:1px;background:rgba(255,255,255,0.15);margin:0 80px;';
+        sepBefore.style.cssText = 'height:1px;background:rgba(255,255,255,0.15);margin:0 clamp(16px,6vw,80px);';
         anchorSection.parentElement.insertBefore(sepBefore, expContainer);
 
         // Scroll animation observer
@@ -488,11 +563,11 @@ h3.number, h4.title {
 
         var skillsContainer = document.createElement('div');
         skillsContainer.id = 'skills-section';
-        skillsContainer.style.cssText = 'padding:30px 80px 60px;max-width:1400px;margin:0 auto;';
+        skillsContainer.style.cssText = 'padding:clamp(16px,3vw,30px) clamp(16px,6vw,80px) clamp(30px,5vw,60px);max-width:1400px;margin:0 auto;';
 
         var sTitle = document.createElement('h2');
         sTitle.className = 'skills-title-animate';
-        sTitle.style.cssText = 'font-family:Montserrat,sans-serif;font-size:42px;font-weight:300;color:white;margin-top:0;margin-bottom:50px;letter-spacing:-0.5px;opacity:0;transform:translateY(30px);transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1),transform 0.8s cubic-bezier(0.16,1,0.3,1);';
+        sTitle.style.cssText = 'font-family:Montserrat,sans-serif;font-size:clamp(24px,5vw,42px);font-weight:300;color:white;margin-top:0;margin-bottom:clamp(24px,4vw,50px);letter-spacing:-0.5px;opacity:0;transform:translateY(30px);transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1),transform 0.8s cubic-bezier(0.16,1,0.3,1);';
         sTitle.textContent = 'Skills';
         skillsContainer.appendChild(sTitle);
 
@@ -506,14 +581,15 @@ h3.number, h4.title {
         ];
 
         var grid = document.createElement('div');
-        grid.style.cssText = 'display:grid;grid-template-columns:repeat(3,1fr);gap:28px;';
+        grid.id = 'skills-grid';
+        grid.style.cssText = 'display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.5vw,28px);';
 
         skills.forEach(function(skill, i) {
             var card = document.createElement('div');
             card.className = 'skill-card-animate';
             card.style.cssText = 'position:relative;border-radius:20px;overflow:hidden;background:linear-gradient(165deg,rgba(80,30,160,0.7) 0%,rgba(20,8,50,0.98) 40%,rgba(60,15,120,0.65) 70%,rgba(140,50,200,0.5) 100%);border:1px solid rgba(160,100,220,0.3);box-shadow:0 8px 32px rgba(0,0,0,0.5),0 0 40px rgba(140,60,200,0.1);opacity:0;transform:translateY(50px) scale(0.95);transition:transform 0.6s cubic-bezier(0.16,1,0.3,1),box-shadow 0.3s,opacity 0.6s cubic-bezier(0.16,1,0.3,1);transition-delay:' + (i * 0.1) + 's;display:flex;flex-direction:column;';
             var iconArea = document.createElement('div');
-            iconArea.style.cssText = 'position:relative;height:140px;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 90%,rgba(180,80,255,0.55) 0%,rgba(120,40,200,0.3) 40%,rgba(60,20,100,0.15) 70%);';
+            iconArea.style.cssText = 'position:relative;height:clamp(90px,15vw,140px);display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 90%,rgba(180,80,255,0.55) 0%,rgba(120,40,200,0.3) 40%,rgba(60,20,100,0.15) 70%);';
             var particles = document.createElement('div');
             particles.style.cssText = 'position:absolute;inset:0;overflow:hidden;';
             for (var p = 0; p < 8; p++) {
@@ -528,7 +604,7 @@ h3.number, h4.title {
             }
             iconArea.appendChild(particles);
             var titleEl = document.createElement('div');
-            titleEl.style.cssText = 'font-family:Montserrat,sans-serif;font-size:20px;font-weight:700;color:white;position:relative;z-index:1;text-align:center;padding:0 20px;line-height:1.3;text-shadow:0 2px 12px rgba(0,0,0,0.4);';
+            titleEl.style.cssText = 'font-family:Montserrat,sans-serif;font-size:clamp(16px,2vw,20px);font-weight:700;color:white;position:relative;z-index:1;text-align:center;padding:0 20px;line-height:1.3;text-shadow:0 2px 12px rgba(0,0,0,0.4);';
             titleEl.textContent = skill.title;
             iconArea.appendChild(titleEl);
             card.appendChild(iconArea);
@@ -555,13 +631,13 @@ h3.number, h4.title {
         skillsContainer.appendChild(grid);
 
         var skillsSepBefore = document.createElement('div');
-        skillsSepBefore.style.cssText = 'height:1px;background:rgba(255,255,255,0.15);margin:0 80px;';
+        skillsSepBefore.style.cssText = 'height:1px;background:rgba(255,255,255,0.15);margin:0 clamp(16px,6vw,80px);';
         toolsSec.parentElement.insertBefore(skillsContainer, toolsSec);
         toolsSec.parentElement.insertBefore(skillsSepBefore, skillsContainer);
 
         // Add separator between skills and tools
         var skillsSepAfter = document.createElement('div');
-        skillsSepAfter.style.cssText = 'height:1px;background:rgba(255,255,255,0.15);margin:0 80px;';
+        skillsSepAfter.style.cssText = 'height:1px;background:rgba(255,255,255,0.15);margin:0 clamp(16px,6vw,80px);';
         toolsSec.parentElement.insertBefore(skillsSepAfter, toolsSec);
 
         var skillsObserver = new IntersectionObserver(function(entries) {
@@ -603,7 +679,7 @@ h3.number, h4.title {
 
         var grid3 = document.createElement('div');
         grid3.className = 'cv-replacement-grid';
-        grid3.style.cssText = 'display:grid;grid-template-columns:repeat(5,1fr);gap:14px;padding:20px 0;';
+        grid3.style.cssText = 'display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(10px,1.5vw,14px);padding:20px 0;';
         var tools = ['Microsoft Project', 'Notion', 'Salesforce', 'Canva', 'Adobe Suite', 'ChatGPT / Claude', 'Excel / Google Sheets', 'Google Workspace', 'Slack / Teams', 'Jira / Trello'];
         tools.forEach(function(t) { grid3.appendChild(createToolCard(t)); });
         var container3 = toolSection.querySelector('.bloc-teaserspeakers');
@@ -615,7 +691,7 @@ h3.number, h4.title {
         var eduSec = document.getElementById('bl-3dff2cec-e658-4825-b819-0927da0843b1');
         if (eduSec) {
             var toolsEduSep = document.createElement('div');
-            toolsEduSep.style.cssText = 'height:1px;background:rgba(255,255,255,0.15);margin:0 80px;';
+            toolsEduSep.style.cssText = 'height:1px;background:rgba(255,255,255,0.15);margin:0 clamp(16px,6vw,80px);';
             eduSec.parentElement.insertBefore(toolsEduSep, eduSec);
         }
     })();
@@ -631,12 +707,12 @@ h3.number, h4.title {
 
         var eduContainer = document.createElement('div');
         eduContainer.id = 'education-replacement';
-        eduContainer.style.cssText = 'padding:30px 80px;max-width:1400px;margin:0 auto;';
+        eduContainer.style.cssText = 'padding:clamp(16px,3vw,30px) clamp(16px,6vw,80px);max-width:1400px;margin:0 auto;';
 
         // Section title
         var eduTitle = document.createElement('h2');
         eduTitle.className = 'edu-title-animate';
-        eduTitle.style.cssText = 'font-family:Montserrat,sans-serif;font-size:42px;font-weight:300;color:white;margin-top:0;margin-bottom:50px;letter-spacing:-0.5px;opacity:0;transform:translateY(30px);transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1),transform 0.8s cubic-bezier(0.16,1,0.3,1);';
+        eduTitle.style.cssText = 'font-family:Montserrat,sans-serif;font-size:clamp(24px,5vw,42px);font-weight:300;color:white;margin-top:0;margin-bottom:clamp(24px,4vw,50px);letter-spacing:-0.5px;opacity:0;transform:translateY(30px);transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1),transform 0.8s cubic-bezier(0.16,1,0.3,1);';
         eduTitle.textContent = 'Education & Academic Projects';
         eduContainer.appendChild(eduTitle);
 
@@ -667,12 +743,13 @@ h3.number, h4.title {
 
         // Sub-title for Education
         var eduSubTitle = document.createElement('div');
-        eduSubTitle.style.cssText = 'font-family:Montserrat,sans-serif;font-size:18px;font-weight:300;color:rgba(255,255,255,0.5);margin-bottom:28px;letter-spacing:1px;text-transform:uppercase;';
+        eduSubTitle.style.cssText = 'font-family:Montserrat,sans-serif;font-size:clamp(14px,2vw,18px);font-weight:300;color:rgba(255,255,255,0.5);margin-bottom:28px;letter-spacing:1px;text-transform:uppercase;';
         eduSubTitle.textContent = 'Education';
         eduContainer.appendChild(eduSubTitle);
 
         var schoolGrid = document.createElement('div');
-        schoolGrid.style.cssText = 'display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-bottom:50px;';
+        schoolGrid.id = 'school-grid';
+        schoolGrid.style.cssText = 'display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.5vw,28px);margin-bottom:clamp(24px,4vw,50px);';
 
         schools.forEach(function(school, i) {
             var card = document.createElement('div');
@@ -681,7 +758,7 @@ h3.number, h4.title {
 
             // Icon area
             var iconArea = document.createElement('div');
-            iconArea.style.cssText = 'position:relative;height:130px;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 90%,rgba(180,80,255,0.55) 0%,rgba(120,40,200,0.3) 40%,rgba(60,20,100,0.15) 70%);';
+            iconArea.style.cssText = 'position:relative;height:clamp(80px,14vw,130px);display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 90%,rgba(180,80,255,0.55) 0%,rgba(120,40,200,0.3) 40%,rgba(60,20,100,0.15) 70%);';
 
             // Particles
             var particles = document.createElement('div');
@@ -755,7 +832,7 @@ h3.number, h4.title {
 
         // === PROFESSIONAL PROJECTS - Glassmorphic cards ===
         var projSubTitle = document.createElement('div');
-        projSubTitle.style.cssText = 'font-family:Montserrat,sans-serif;font-size:18px;font-weight:300;color:rgba(255,255,255,0.5);margin-bottom:28px;letter-spacing:1px;text-transform:uppercase;';
+        projSubTitle.style.cssText = 'font-family:Montserrat,sans-serif;font-size:clamp(14px,2vw,18px);font-weight:300;color:rgba(255,255,255,0.5);margin-bottom:28px;letter-spacing:1px;text-transform:uppercase;';
         projSubTitle.textContent = 'Professional Projects';
         eduContainer.appendChild(projSubTitle);
 
@@ -775,7 +852,8 @@ h3.number, h4.title {
         ];
 
         var projGrid = document.createElement('div');
-        projGrid.style.cssText = 'display:grid;grid-template-columns:repeat(2,1fr);gap:28px;';
+        projGrid.id = 'projects-grid';
+        projGrid.style.cssText = 'display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(14px,2.5vw,28px);';
 
         projects.forEach(function(proj, i) {
             var card = document.createElement('div');
