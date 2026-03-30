@@ -193,20 +193,32 @@ body {
 .app-layout {
     padding-top: 70px !important;
 }
-/* Nav scroll links — gradient hover matching Adopt AI */
+/* Nav scroll links — animated gradient hover matching Adopt AI */
+@property --color1 { syntax: "<color>"; inherits: false; initial-value: transparent; }
+@property --color2 { syntax: "<color>"; inherits: false; initial-value: transparent; }
+@property --position1 { syntax: "<percentage>"; inherits: false; initial-value: 0%; }
+@property --position2 { syntax: "<percentage>"; inherits: false; initial-value: 100%; }
+@property --position3 { syntax: "<percentage>"; inherits: false; initial-value: 40%; }
+@property --position4 { syntax: "<percentage>"; inherits: false; initial-value: 25%; }
+@property --position5 { syntax: "<percentage>"; inherits: false; initial-value: 75%; }
+
 .app-header .links-list .menuitem a.lightbtn[role="button"] {
+    background: linear-gradient(to right, var(--color1) var(--position1), transparent var(--position4), transparent var(--position3), transparent var(--position5), var(--color2) var(--position2)) !important;
     border: 1px solid rgba(255, 255, 255, 0.26) !important;
     border-radius: 100px !important;
     padding: 8px 25px !important;
-    background-image: none !important;
-    background-color: transparent !important;
-    transition: all 0.4s ease !important;
+    transition: --color1 0.3s, --color2 0.3s, --position1 0.4s, --position2 0.4s, --position3 0.4s, --position4 0.4s, --position5 0.4s, border-color 0.3s !important;
     cursor: pointer !important;
 }
 .app-header .links-list .menuitem a.lightbtn[role="button"]:hover,
 .app-header .links-list .menuitem a.lightbtn[role="button"]:focus {
-    background-image: linear-gradient(to right, #FA94EF 10%, transparent 50%, transparent 50%, transparent 0%, #9E2DBD 100%) !important;
-    background-color: transparent !important;
+    --color1: #FA94EF;
+    --color2: #9E2DBD;
+    --position1: 10%;
+    --position2: 100%;
+    --position3: 50%;
+    --position4: 50%;
+    --position5: 0%;
     border-color: rgb(10, 22, 52) !important;
 }
 .nav-scroll {
