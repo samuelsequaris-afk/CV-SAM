@@ -193,12 +193,24 @@ body {
 .app-layout {
     padding-top: 70px !important;
 }
-/* Nav scroll links cursor */
-.nav-scroll {
+/* Nav scroll links — gradient hover matching Adopt AI */
+.app-header .links-list .menuitem a.lightbtn[role="button"] {
+    border: 1px solid rgba(255, 255, 255, 0.26) !important;
+    border-radius: 100px !important;
+    padding: 8px 25px !important;
+    background-image: none !important;
+    background-color: transparent !important;
+    transition: all 0.4s ease !important;
     cursor: pointer !important;
 }
-.nav-scroll:hover span {
-    opacity: 0.8;
+.app-header .links-list .menuitem a.lightbtn[role="button"]:hover,
+.app-header .links-list .menuitem a.lightbtn[role="button"]:focus {
+    background-image: linear-gradient(to right, #FA94EF 10%, transparent 50%, transparent 50%, transparent 0%, #9E2DBD 100%) !important;
+    background-color: transparent !important;
+    border-color: rgb(10, 22, 52) !important;
+}
+.nav-scroll {
+    cursor: pointer !important;
 }
 
 /* Remove InWink built-in section top borders (prevent double lines with JS separators) */
