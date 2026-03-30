@@ -39,6 +39,13 @@
                        
     <link rel="stylesheet" type="text/css" href="./Adopt AI Grand Palais_files/c-20260326-24516-faf9edaea0290245d5dc.css" crossorigin="anonymous"><link rel="stylesheet" type="text/css" href="./Adopt AI Grand Palais_files/c-20260326-99075-014093cd3a136cd77117.css" crossorigin="anonymous">
 <style id="static-overrides">
+@property --color1 { syntax: "<color>"; inherits: false; initial-value: #ffffffad; }
+@property --color2 { syntax: "<color>"; inherits: false; initial-value: #ffffffad; }
+@property --position1 { syntax: "<percentage>"; inherits: false; initial-value: 0%; }
+@property --position2 { syntax: "<percentage>"; inherits: false; initial-value: 100%; }
+@property --position3 { syntax: "<percentage>"; inherits: false; initial-value: 40%; }
+@property --position4 { syntax: "<percentage>"; inherits: false; initial-value: 25%; }
+@property --position5 { syntax: "<percentage>"; inherits: false; initial-value: 75%; }
 /* Kill all CSS containment - it breaks static layout */
 * { contain: none !important; container-type: normal !important; }
 /* Make static page scrollable - override InWink app shell styles */
@@ -193,34 +200,7 @@ body {
 .app-layout {
     padding-top: 70px !important;
 }
-/* Nav scroll links — animated gradient hover matching Adopt AI */
-@property --color1 { syntax: "<color>"; inherits: false; initial-value: transparent; }
-@property --color2 { syntax: "<color>"; inherits: false; initial-value: transparent; }
-@property --position1 { syntax: "<percentage>"; inherits: false; initial-value: 0%; }
-@property --position2 { syntax: "<percentage>"; inherits: false; initial-value: 100%; }
-@property --position3 { syntax: "<percentage>"; inherits: false; initial-value: 40%; }
-@property --position4 { syntax: "<percentage>"; inherits: false; initial-value: 25%; }
-@property --position5 { syntax: "<percentage>"; inherits: false; initial-value: 75%; }
-
-.app-header .links-list .menuitem a.lightbtn[role="button"] {
-    background: linear-gradient(to right, var(--color1) var(--position1), transparent var(--position4), transparent var(--position3), transparent var(--position5), var(--color2) var(--position2)) !important;
-    border: 1px solid rgba(255, 255, 255, 0.26) !important;
-    border-radius: 100px !important;
-    padding: 8px 25px !important;
-    transition: --color1 0.3s, --color2 0.3s, --position1 0.4s, --position2 0.4s, --position3 0.4s, --position4 0.4s, --position5 0.4s, border-color 0.3s !important;
-    cursor: pointer !important;
-}
-.app-header .links-list .menuitem a.lightbtn[role="button"]:hover,
-.app-header .links-list .menuitem a.lightbtn[role="button"]:focus {
-    --color1: #FA94EF;
-    --color2: #9E2DBD;
-    --position1: 10%;
-    --position2: 100%;
-    --position3: 50%;
-    --position4: 50%;
-    --position5: 0%;
-    border-color: rgb(10, 22, 52) !important;
-}
+/* Nav scroll links — gradient hover injected via JS at bottom to override InWink */
 .nav-scroll {
     cursor: pointer !important;
 }
@@ -1375,6 +1355,57 @@ h3.number, h4.title {
                 el.appendChild(a2);
             }
         });
+    })();
+
+    // Nav hover gradient — delayed + observer to override InWink styles
+    // Uses @property-registered custom properties so the browser can interpolate them smoothly
+    (function() {
+        var gradientBg = 'linear-gradient(to right, var(--color1) var(--position1), transparent var(--position4), transparent var(--position3), transparent var(--position5), var(--color2) var(--position2))';
+        var transitionVal = '--color1 0.3s ease, --color2 0.3s ease, --position1 0.4s ease, --position2 0.4s ease, --position3 0.4s ease, --position4 0.4s ease, --position5 0.4s ease, border-color 0.3s ease';
+        function applyNavStyles() {
+            var btns = document.querySelectorAll('.app-header .links-list .menuitem a.lightbtn');
+            btns.forEach(function(btn) {
+                if (btn.dataset.navHover) return;
+                btn.dataset.navHover = '1';
+                btn.style.setProperty('background', gradientBg, 'important');
+                btn.style.setProperty('transition', transitionVal, 'important');
+                // Set default custom property values
+                btn.style.setProperty('--color1', '#ffffffad');
+                btn.style.setProperty('--color2', '#ffffffad');
+                btn.style.setProperty('--position1', '0%');
+                btn.style.setProperty('--position2', '100%');
+                btn.style.setProperty('--position3', '40%');
+                btn.style.setProperty('--position4', '25%');
+                btn.style.setProperty('--position5', '75%');
+                btn.addEventListener('mouseenter', function() {
+                    btn.style.setProperty('--color1', '#FA94EF');
+                    btn.style.setProperty('--color2', '#9E2DBD');
+                    btn.style.setProperty('--position1', '10%');
+                    btn.style.setProperty('--position2', '100%');
+                    btn.style.setProperty('--position3', '50%');
+                    btn.style.setProperty('--position4', '50%');
+                    btn.style.setProperty('--position5', '0%');
+                    btn.style.setProperty('border-color', 'rgb(10,22,52)', 'important');
+                });
+                btn.addEventListener('mouseleave', function() {
+                    btn.style.setProperty('--color1', '#ffffffad');
+                    btn.style.setProperty('--color2', '#ffffffad');
+                    btn.style.setProperty('--position1', '0%');
+                    btn.style.setProperty('--position2', '100%');
+                    btn.style.setProperty('--position3', '40%');
+                    btn.style.setProperty('--position4', '25%');
+                    btn.style.setProperty('--position5', '75%');
+                    btn.style.setProperty('border-color', 'rgba(255,255,255,0.26)', 'important');
+                });
+            });
+        }
+        // Run after InWink finishes rendering
+        setTimeout(applyNavStyles, 1500);
+        setTimeout(applyNavStyles, 3000);
+        // Also observe for DOM changes
+        var obs = new MutationObserver(function() { setTimeout(applyNavStyles, 100); });
+        var header = document.querySelector('.app-header');
+        if (header) obs.observe(header, { childList: true, subtree: true });
     })();
 
 })();
